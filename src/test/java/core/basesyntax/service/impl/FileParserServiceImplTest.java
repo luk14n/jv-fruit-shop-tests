@@ -11,6 +11,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileParserServiceImplTest {
+    private static final String INVALID_OPTION1 = "x,banana,12";
+    private static final String INVALID_OPTION2 = "y,apple,7";
+    private static final String INVALID_VALUE1 = "b,banana,value";
+    private static final String INVALID_VALUE2 = "p,apple,value1";
+    private static final String INVALID_INPUT1 = "b-fruit1-value";
+    private static final String INVALID_INPUT2 = "p-fruit2-value2";
     private static FileParserService recordsParser;
 
     @BeforeAll
@@ -29,8 +35,8 @@ class FileParserServiceImplTest {
     @Test
     void parse_invalidOption_notOk() {
         List<String> list = new ArrayList<>();
-        list.add("x,banana,12");
-        list.add("y,apple,7");
+        list.add(INVALID_OPTION1);
+        list.add(INVALID_OPTION2);
         assertThrows(RuntimeException.class,
                 () -> recordsParser.parse(list));
     }
@@ -38,8 +44,8 @@ class FileParserServiceImplTest {
     @Test
     void parse_invalidValue_notOk() {
         List<String> list = new ArrayList<>();
-        list.add("b,banana,value");
-        list.add("p,apple,value1");
+        list.add(INVALID_VALUE1);
+        list.add(INVALID_VALUE2);
         assertThrows(NumberFormatException.class,
                 () -> recordsParser.parse(list));
     }
@@ -47,8 +53,8 @@ class FileParserServiceImplTest {
     @Test
     void parse_invalidInput_notOk() {
         List<String> list = new ArrayList<>();
-        list.add("b-fruit1-value");
-        list.add("p-fruit2-value2");
+        list.add(INVALID_INPUT1);
+        list.add(INVALID_INPUT2);
         assertThrows(RuntimeException.class,
                 () -> recordsParser.parse(list));
     }

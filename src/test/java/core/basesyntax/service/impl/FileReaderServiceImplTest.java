@@ -12,6 +12,7 @@ class FileReaderServiceImplTest {
     private static final String REGULAR_INPUT = "src/test/resources/test_input.csv";
     private static final String EMPTY_INPUT = "src/test/resources/test_empty_input.csv";
     private static FileReaderService readerService;
+    private static final String INVALID_FILE_NAME = "file";
 
     @BeforeAll
     static void beforeAll() {
@@ -27,7 +28,7 @@ class FileReaderServiceImplTest {
     @Test
     void read_invalidFile_NotOk() {
         assertThrows(RuntimeException.class,
-                () -> readerService.read("file"));
+                () -> readerService.read(INVALID_FILE_NAME));
     }
 
     @Test

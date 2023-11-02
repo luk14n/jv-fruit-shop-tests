@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 class FileWriterServiceImplTest {
     private static final String OUTPUT = "src/test/resources/test_output.csv";
     private static FileWriterService writerService;
+    private static final String EMPTY_DATA = "";
+    private static final String VALID_DATA = "p,apple,20\nb,banana,5\n";
 
     @BeforeAll
     static void beforeAll() {
@@ -23,8 +25,7 @@ class FileWriterServiceImplTest {
     @Test
     void write_checkLists_Ok() {
         List<String> expected = List.of("p,apple,20", "b,banana,5");
-        String data = "p,apple,20\nb,banana,5\n";
-        writerService.write(OUTPUT, data);
+        writerService.write(OUTPUT, VALID_DATA);
         try {
             Assertions.assertEquals(expected, Files.readAllLines(Path.of(OUTPUT)));
         } catch (IOException e) {
@@ -40,8 +41,7 @@ class FileWriterServiceImplTest {
 
     @Test
     void write_emptyData_Ok() {
-        String data = "";
-        writerService.write(OUTPUT, data);
+        writerService.write(OUTPUT, EMPTY_DATA);
         List<String> lines;
         try {
             lines = Files.readAllLines(Path.of(OUTPUT));
